@@ -34,11 +34,14 @@ async function run() {
   });
 
   if(r && r.data && r.data.parent) {
+    console.log(r.data.parent);
     owner = r.data.parent.owner.login || owner
     repo = r.data.parent.name || repo
   }
 
   try {
+    console.log('owner', owner);
+    console.log('repo', repo);
     let pr = await octokit.pulls.create({ owner: context.repo.owner, repo: context.repo.repo, title: prTitle, head: owner + ':' + head, base: base, body: prMessage, maintainer_can_modify: false });
     await delay(20);
     if (autoApprove) {
