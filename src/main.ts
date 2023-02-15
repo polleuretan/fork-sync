@@ -42,6 +42,9 @@ async function run() {
   try {
     console.log('owner', owner);
     console.log('repo', repo);
+    console.log('head', owner + ':' + head);
+    console.log('context.repo.owner', context.repo.owner);
+    console.log('context.repo.repo', context.repo.repo);
     let pr = await octokit.pulls.create({ owner: context.repo.owner, repo: context.repo.repo, title: prTitle, head: owner + ':' + head, base: base, body: prMessage, maintainer_can_modify: false });
     await delay(20);
     if (autoApprove) {
